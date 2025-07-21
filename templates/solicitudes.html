@@ -1,0 +1,228 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Receta Contingencia (Médico)</h1>
+
+    <form id="recetaForm" method="POST" action="/crear_solicitud_receta">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <!-- Información del Paciente -->
+        <h4>Información del Paciente</h4>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="rut" class="form-label">RUT Paciente</label>
+                <input type="text" class="form-control" id="rut" name="rut" required onblur="completarDatosPaciente()">
+            </div>
+            <div class="col-md-6">
+                <label for="nombre" class="form-label">Nombre (Nombres + Apellidos)</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required readonly>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label for="fecha_nacimiento" class="form-label">Fecha de Nacimiento</label>
+                <input type="date" class="form-control" id="fecha_nacimiento" name="fecha_nacimiento" required readonly>
+            </div>
+            <div class="col-md-4">
+                <label for="sexo" class="form-label">Sexo</label>
+                <select class="form-control" id="sexo" name="sexo" required>
+                    <option value="">Selecciona una opción</option>
+                    <option value="M">Masculino</option>
+                    <option value="F">Femenino</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <label for="edad" class="form-label">Edad</label>
+                <input type="number" class="form-control" id="edad" name="edad" readonly>
+            </div>
+        </div>
+
+        <!-- Diagnóstico -->
+        <h4>Diagnóstico</h4>
+        <div class="row mb-3">
+            <div class="col-md-12">
+                <label for="diagnostico" class="form-label">Diagnóstico</label>
+                <input type="text" class="form-control" id="diagnostico" name="diagnostico" required>
+            </div>
+        </div>
+
+        <!-- Servicio y Cama -->
+        <h4>Servicio y Cama</h4>
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="servicio" class="form-label">Servicio</label>
+                <select id="servicio" name="servicio" class="form-select" required>
+                    <option value="">Seleccione un servicio</option>
+                    <option value="1">MEDICINA 1</option>
+                    <option value="2">MEDICINA 2</option>
+                    <option value="3">MEDICINA 3</option>
+                    <option value="4">GERIATRIA</option>
+                    <option value="5">GINECOLOGIA - ARO</option>
+                    <option value="6">PUERPERIO</option>
+                    <option value="7">CIRUGIA 1</option>
+                    <option value="8">CIRUGIA 2</option>
+                    <option value="9">MQI5TO PISO</option>
+                    <option value="10">PEDIATRIA AGUDO</option>
+                    <option value="11">PEDIATRIA BASICO</option>
+                    <option value="12">MQI2DO PISO</option>
+                    <option value="13">HOSPITALIZACION DOMICILIARIA</option>
+                    <option value="14">NEONATOLOGIA</option>
+                    <option value="15">SAIP</option>
+                    <option value="16">UPC INFANTIL</option>
+                    <option value="17">UPC ADULTO</option>
+                    <option value="18">MQI3ER PISO</option>
+                    <option value="19">HOSPITAL DE DIA - SALUD MENTAL</option>
+                    <option value="20">URGENCIA PEDIATRICA</option>
+                    <option value="21">URGENCIA MATERNIDAD</option>
+                    <option value="22">CMA</option>
+                    <option value="23">URGENCIA ADULTO</option>
+                </select>
+            </div>
+            <div class="col-md-6">
+                <label for="cama" class="form-label">Cama</label>
+                <input type="text" class="form-control" id="cama" name="cama" required>
+            </div>
+        </div>
+
+        <!-- Datos del Profesional -->
+<div class="card mb-3">
+    <div class="card-header bg-primary text-white">
+        <h4 class="mb-0">Datos del Profesional</h4>
+    </div>
+    <div class="card-body">
+        <div class="row mb-2">
+            <div class="col-sm-4"><strong>RUN Profesional:</strong></div>
+            <div class="col-sm-8">
+                {{ session["run_profesional"] }}
+                <input type="hidden" id="run_profesional" name="run_profesional" value="{{ session['run_profesional'] }}">
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-sm-4"><strong>Nombres:</strong></div>
+            <div class="col-sm-8">
+                {{ session["nombre_profesional"] }}
+                <input type="hidden" id="nombre_profesional" name="nombre_profesional" value="{{ session['nombre_profesional'] }}">
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-sm-4"><strong>Apellidos:</strong></div>
+            <div class="col-sm-8">
+                {{ session["apellido_profesional"] }}
+                <input type="hidden" id="apellido_profesional" name="apellido_profesional" value="{{ session['apellido_profesional'] }}">
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col-sm-4"><strong>Tipo Profesional:</strong></div>
+            <div class="col-sm-8">
+                {{ session["tipo_profesional"] }}
+                <input type="hidden" id="tipo_profesional" name="tipo_profesional" value="{{ session['tipo_profesional'] }}">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        <!-- Medicamentos -->
+        <h4 class="mt-4">Medicamentos</h4>
+        <table class="table table-bordered">
+            <thead class="table-success">
+                <tr>
+                    <th>N°</th><th>Medicamento</th><th>Dosis</th><th>Unidad</th><th>Posología</th><th>Duración</th><th>Vía</th><th>Observaciones</th>
+                </tr>
+            </thead>
+            <tbody id="medicamentos-list">
+                <tr>
+                    <td>1</td>
+                    <td><input type="text" name="medicamento[]" placeholder="Buscar medicamento..." class="form-control"><input type="hidden" name="codigo_medicamento[]" value=""></td>
+                    <td><input type="number" name="dosis_por_toma[]" class="form-control" step="any"></td>
+                    <td><select name="unidad_dosis[]" class="form-control"><option value="">Seleccione</option><option value="mg">MG</option><option value="g">G</option><option value="ml">ML</option><option value="comprimidos">Comprimidos</option></select></td>
+                    <td><select name="posologia[]" class="form-control"><option value="">Seleccione</option><option value="1 cada 8 horas">1 cada 8 horas</option><option value="1 cada 12 horas">1 cada 12 horas</option><option value="1 cada 6 horas">1 cada 6 horas</option><option value="2 veces al día">2 veces al día</option><option value="1 cada 24 horas">1 cada 24 horas</option><option value="1 cada 4 horas">1 cada 4 horas</option><option value="1 antes de cada comida">1 antes de cada comida</option><option value="1 después de cada comida">1 después de cada comida</option><option value="1 al acostarse">1 al acostarse</option><option value="Aplicar 1 vez al día">Aplicar 1 vez al día</option></select></td>
+                    <td><input type="number" name="duracion[]" class="form-control"></td>
+                    <td><select name="via[]" class="form-control"><option value="">Seleccione</option><option value="ORAL">ORAL</option><option value="SUBLINGUAL">SUBLINGUAL</option><option value="TOPICA">TÓPICA</option><option value="SUBCUTANEA">SUBCUTÁNEA</option><option value="INTRAMUSCULAR">INTRAMUSCULAR</option><option value="INTRATECAL, EPIDURAL">INTRATECAL, EPIDURAL</option><option value="INTRARTICULAR">INTRARTICULAR</option><option value="INTRAVENOSA">INTRAVENOSA</option></select></td>
+                    <td><input type="text" name="observacion[]" class="form-control"></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="d-flex justify-content-between mt-3">
+            <button type="button" id="addRowBtn" class="btn btn-success">Agregar Medicamento</button>
+            <button type="button" id="verRecetaBtn" class="btn btn-primary">Ver Receta</button>
+        </div>
+
+        <div class="mt-4 text-end">
+            <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
+        </div>
+    </form>
+    <!-- Modal de la vista previa de receta -->
+<!-- Modal de la vista previa de receta -->
+<div class="modal fade" id="recetaModal" tabindex="-1" aria-labelledby="recetaModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content p-4" id="receta-content">
+      <div class="text-center mb-3 border-bottom pb-2">
+        <div class="d-flex justify-content-between">
+          <div class="text-start small">
+            <strong>Clínica Salud Total</strong><br>
+            Dr. Juan Pérez
+          </div>
+          <div class="text-end small">
+            <strong>Fecha:</strong> <span id="fechaModal"></span><br>
+            <strong>N° Receta:</strong> -
+          </div>
+        </div>
+        <h5 class="mt-3 fw-bold">DETALLES DE LA RECETA</h5>
+        <h6 class="fw-normal">Receta Médica - Uso Interno</h6>
+      </div>
+
+      <div id="detallesReceta" class="px-2">
+        <!-- Contenido dinámico -->
+      </div>
+
+      <div class="modal-footer d-print-none">
+        <button type="button" id="imprimirReceta" class="btn btn-secondary">Imprimir</button>
+        <button type="submit" id="confirmarEnvio" class="btn btn-primary">Confirmar Envío</button>
+        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/solicitudes_medico.js') }}"></script>
+<script src="{{ url_for('static', filename='js/parseo.js') }}"></script>
+<style>
+  @media print {
+    body * {
+      visibility: hidden;
+    }
+    #receta-content, #receta-content * {
+      visibility: visible;
+    }
+    #receta-content {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+    }
+    .modal-footer {
+      display: none !important;
+    }
+  }
+
+  #receta-content {
+    font-size: 14px;
+  }
+
+  #detallesReceta table th,
+  #detallesReceta table td {
+    padding: 4px;
+    font-size: 13px;
+  }
+</style>
+
+{% endblock %}

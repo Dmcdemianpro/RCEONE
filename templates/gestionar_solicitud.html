@@ -1,0 +1,114 @@
+{% extends "base.html" %}
+
+{% block title %}Gestionar Solicitudes{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center">Solicitudes</h1>
+    
+    <!-- Formulario de filtros -->
+    <form method="GET" action="/gestionar_solicitud" class="row g-3 mb-3">
+        
+      <div class="col-md-2">
+        <label for="id_solicitud" class="form-label">ID Solicitud</label>
+        <input type="text" class="form-control" name="id_solicitud" id="id_solicitud">
+      </div>
+      <div class="col-md-2">
+        <label for="rut_paciente" class="form-label">RUT Paciente</label>
+        <input type="text" class="form-control" name="rut_paciente" id="rut_paciente">
+      </div>
+      <div class="col-md-3">
+        <label for="nombre_paciente" class="form-label">Nombre Paciente</label>
+        <input type="text" class="form-control" name="nombre_paciente" id="nombre_paciente">
+      </div>
+      <div class="col-md-2">
+        <label for="estado" class="form-label">Estado</label>
+        <select class="form-select" name="estado" id="estado">
+          <option value="">(Todos)</option>
+          <option value="pending">Pendiente</option>
+          <option value="approved">Aptobado</option>
+          <option value="canceled">Cancelado</option>
+        </select>
+      </div>
+      <div class="col-md-2 align-self-end">
+        <button type="submit" class="btn btn-primary w-100">Buscar</button>
+      </div>
+    </form>
+    
+    <!-- Botón Refrescar -->
+    <button class="btn btn-secondary mb-3" id="refreshBtn">Refrescar</button>
+
+    {% if solicitudes %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID Solicitud</th>
+                <th>RUT Paciente</th>
+                <th>Nombre Paciente</th>
+                <th>Estado</th>
+                <th>Creada En</th>
+                <th>Creada Por</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for solicitud in solicitudes %}
+            <tr>
+                <td>{{ solicitud[0] }}</td>  <!-- sr.id -->
+                <td>{{ solicitud[1] }}</td>  <!-- r.rut -->
+                <td>{{ solicitud[2] }}</td>  <!-- nombre completo concatenado -->
+                <td>{{ solicitud[3] }}</td>  <!-- sr.estado -->
+                <td>{{ solicitud[4] }}</td>  <!-- creada_en_fmt -->
+                <td>{{ solicitud[5] }}</td>  <!-- sr.creada_por -->
+                <td>
+                    <!-- Botón Aprobar -->
+                    <button class="btn btn-success btn-sm aprobar-btn" type="button" data-id="{{ solicitud[0] }}">
+                        Aprobar
+                    </button>
+                    <button class="btn btn-danger btn-sm cancelar-btn" type="button" data-id="{{ solicitud[0] }}">
+                        Cancelar
+                    </button>
+                    
+                    <!-- Botón Editar (redirige a /editar_solicitud/<id>) -->
+                    <a class="btn btn-warning btn-sm" 
+                       href="/editar_solicitud/{{ solicitud[0] }}">
+                       Editar
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No hay solicitudes encontradas.</p>
+    {% endif %}
+    
+    <!-- Modal de Confirmación -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="confirmModalLabel" class="modal-title">Confirmar Acción</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que deseas <span id="accionModal"></span> esta solicitud?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" id="confirmarAccionBtn">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/gestionar_solicitud.js') }}"></script>
+
+{% endblock %}
+
+
+

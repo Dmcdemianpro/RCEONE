@@ -1,0 +1,56 @@
+
+	
+CREATE TABLE IF NOT EXISTS public.solicitudes_recetas (
+    id SERIAL PRIMARY KEY,
+    receta_id INT NOT NULL,
+    estado VARCHAR(50) NOT NULL DEFAULT 'pendiente',
+    creada_por VARCHAR(100) NOT NULL,
+    creada_en TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+ 
+);
+
+-- Tabla recetas
+CREATE TABLE recetas (
+    id SERIAL PRIMARY KEY,
+    rut VARCHAR(20) NOT NULL,
+    nombre VARCHAR(100) NOT NULL,
+    primer_apellido VARCHAR(50) NOT NULL,
+    segundo_apellido VARCHAR(50),
+    fecha_nacimiento DATE,
+    sexo CHAR(1),
+    nombre_profesional VARCHAR(100),
+    primer_apellido_profesional VARCHAR(50),
+    segundo_apellido_profesional VARCHAR(50),
+    run_profesional VARCHAR(20),
+    tipo_profesional VARCHAR(50),
+    codigo_diagnostico VARCHAR(10),
+    descripcion_diagnostico TEXT,
+    identificador_cama VARCHAR(10),
+    identificador_servicio VARCHAR(10),
+    fecha_hora_mensaje TIMESTAMP
+);
+
+-- Tabla prescripciones
+CREATE TABLE prescripciones (
+    id SERIAL PRIMARY KEY,
+    receta_id INTEGER REFERENCES recetas(id) ON DELETE CASCADE,
+    codigo_producto VARCHAR(20),
+    producto VARCHAR(100),
+    dosis_por_toma FLOAT,
+    unidad_entrega VARCHAR(20),
+    posologia VARCHAR(100),
+    duracion INTEGER,
+    via VARCHAR(50),
+    observacion TEXT
+);
+
+-- Tabla solicitudes_recetas
+CREATE TABLE solicitudes_recetas (
+    id SERIAL PRIMARY KEY,
+    receta_id INTEGER REFERENCES recetas(id) ON DELETE CASCADE,
+    estado VARCHAR(20), -- 'pending', 'approved', 'canceled'
+    creada_por VARCHAR(50),
+    creada_en TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    aprobada_por VARCHAR(50),
+    aprobada_en TIMESTAMP
+);

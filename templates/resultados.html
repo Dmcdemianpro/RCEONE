@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Resultados de Búsqueda{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1>Resultados de la Búsqueda</h1>
+
+    <!-- Botón para descargar CSV -->
+    <a href="{{ url_for('descargar_csv', rut=request.args.get('rut'), fecha_inicio=request.args.get('fecha_inicio'), fecha_fin=request.args.get('fecha_fin')) }}" class="btn btn-success mb-4">
+        Descargar CSV
+    </a>
+
+    <!-- Tabla de resultados -->
+    <table class="table table-bordered table-striped">
+        <thead class="table-success">
+            <tr>
+                <th>ID</th>
+                <th>RUT</th>
+                <th>Nombre</th>
+                <th>Primer Apellido</th>
+                <th>Segundo Apellido</th>
+                <th>Fecha de Nacimiento</th>
+                <th>Sexo</th>
+                <th>Fecha de Receta</th>
+                <th>Profesional</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for receta in recetas %}
+            <tr>
+                <td>{{ receta[0] }}</td> <!-- ID -->
+                <td>{{ receta[1] }}</td> <!-- RUT -->
+                <td>{{ receta[2] }}</td> <!-- Nombre -->
+                <td>{{ receta[3] }}</td> <!-- Primer Apellido -->
+                <td>{{ receta[4] }}</td> <!-- Segundo Apellido -->
+                <td>{{ receta[5] }}</td> <!-- Fecha de Nacimiento -->
+                <td>{{ receta[6] }}</td> <!-- Sexo -->
+                <td>{{ receta[7] }}</td> <!-- Fecha de Receta -->
+                <td>{{ receta[8] }}</td> <!-- Profesional -->
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ url_for('historial') }}" class="btn btn-primary mt-3">Volver al formulario</a>
+</div>
+{% endblock %}

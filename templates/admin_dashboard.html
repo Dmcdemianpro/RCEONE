@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+<h1 class="admin-title">Bienvenido, Administrador</h1>
+<p class="text-center">Aquí puedes gestionar los distintos módulos de tu aplicación.</p>
+
+<div class="row row-cols-1 row-cols-md-2 g-4 mt-4">
+    <div class="col">
+        <div class="card h-100 text-center">
+            <div class="card-body">
+                <h5 class="card-title">Crear Receta</h5>
+                <p class="card-text">Accede al formulario para generar nuevas recetas.</p>
+                <a href="{{ url_for('formulario') }}" class="btn btn-primary">Ir al Formulario</a>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card h-100 text-center">
+            <div class="card-body">
+                <h5 class="card-title">Historial</h5>
+                <p class="card-text">Visualiza el historial de recetas enviadas.</p>
+                <a href="{{ url_for('historial') }}" class="btn btn-primary">Ver Historial</a>
+            </div>
+        </div>
+    </div>
+    {% if session.get('role') in ['medico', 'admin'] %}
+    <div class="col">
+        <div class="card h-100 text-center">
+            <div class="card-body">
+                <h5 class="card-title">Recetas Médico</h5>
+                <p class="card-text">Administra solicitudes de recetas pendientes.</p>
+                <a href="{{ url_for('solicitudes') }}" class="btn btn-primary">Ver Solicitudes</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+    {% if session.get('role') == 'admin' %}
+    <div class="col">
+        <div class="card h-100 text-center">
+            <div class="card-body">
+                <h5 class="card-title">Gestión de Usuarios</h5>
+                <p class="card-text">Crea, edita o elimina usuarios.</p>
+                <a href="{{ url_for('listar_usuarios') }}" class="btn btn-primary">Administrar Usuarios</a>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

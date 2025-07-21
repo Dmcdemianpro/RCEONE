@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Gestión de Usuarios{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center">Gestión de Usuarios</h1>
+
+    <!-- Mostrar mensajes flash -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-info">{{ message }}</div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+
+    <!-- Botón para crear nuevo usuario -->
+    <div class="d-flex justify-content-end mb-3">
+        <a href="{{ url_for('nuevo_usuario') }}" class="btn btn-success">Crear Nuevo Usuario</a>
+    </div>
+
+    <!-- Tabla de usuarios -->
+    <table class="table table-bordered">
+        <thead class="table-success">
+            <tr>
+                <th>ID</th>
+                <th>Usuario</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for usuario in usuarios %}
+            <tr>
+                <td>{{ usuario[0] }}</td>
+                <td>{{ usuario[1] }}</td>
+                <td>{{ usuario[2] }}</td>
+                <td>
+                    <a href="{{ url_for('editar_usuario', id=usuario[0]) }}" class="btn btn-primary btn-sm">Editar</a>
+                    <a href="{{ url_for('eliminar_usuario', id=usuario[0]) }}" class="btn btn-danger btn-sm">Eliminar</a>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td colspan="4" class="text-center">No se encontraron usuarios.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

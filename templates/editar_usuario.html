@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Usuario{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="mb-4 text-center">Editar Usuario</h1>
+
+    <!-- Mensajes flash -->
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="alert alert-info">
+          {{ messages[0] }}
+        </div>
+      {% endif %}
+    {% endwith %}
+
+    <!-- Formulario de edición de usuario -->
+    <form action="{{ url_for('editar_usuario', id=usuario[0]) }}" method="post">
+        <!-- Username y Password -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="username" class="form-label">Username</label>
+                <input type="text" class="form-control" id="username" name="username" value="{{ usuario[1] }}" required>
+            </div>
+            <div class="col-md-6">
+                <label for="password" class="form-label">Password (déjalo en blanco si no deseas cambiarlo)</label>
+                <input type="password" class="form-control" id="password" name="password">
+            </div>
+        </div>
+
+        <!-- Rol del usuario -->
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="role" class="form-label">Rol</label>
+                <select class="form-select" id="role" name="role" required>
+                    <option value="usuario" {% if usuario[2] == 'usuario' %}selected{% endif %}>Usuario</option>
+                    <option value="medico" {% if usuario[2] == 'medico' %}selected{% endif %}>Médico</option>
+                    <option value="admin" {% if usuario[2] == 'admin' %}selected{% endif %}>Admin</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Datos profesionales -->
+        <h5 class="mt-4">Datos Profesionales</h5>
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label for="run_profesional" class="form-label">RUN Profesional</label>
+                <input type="text" class="form-control" id="run_profesional" name="run_profesional" value="{{ usuario[4] or '' }}">
+            </div>
+            <div class="col-md-4">
+                <label for="nombre_profesional" class="form-label">Nombre Profesional</label>
+                <input type="text" class="form-control" id="nombre_profesional" name="nombre_profesional" value="{{ usuario[5] or '' }}">
+            </div>
+            <div class="col-md-4">
+                <label for="primer_apellido_profesional" class="form-label">Primer Apellido</label>
+                <input type="text" class="form-control" id="primer_apellido_profesional" name="primer_apellido_profesional" value="{{ usuario[6] or '' }}">
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label for="segundo_apellido_profesional" class="form-label">Segundo Apellido</label>
+                <input type="text" class="form-control" id="segundo_apellido_profesional" name="segundo_apellido_profesional" value="{{ usuario[7] or '' }}">
+            </div>
+            <div class="col-md-4">
+                <label for="tipo_profesional" class="form-label">Tipo Profesional</label>
+                <input type="text" class="form-control" id="tipo_profesional" name="tipo_profesional" value="{{ usuario[8] or '' }}">
+            </div>
+        </div>
+
+        <!-- Botones de acción -->
+        <div class="mt-4 d-flex justify-content-end">
+            <button type="submit" class="btn btn-primary me-2">Actualizar Usuario</button>
+            <a href="{{ url_for('listar_usuarios') }}" class="btn btn-secondary">Cancelar</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

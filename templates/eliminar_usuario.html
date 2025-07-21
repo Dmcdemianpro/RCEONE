@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}Eliminar Usuario{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4">Eliminar Usuario</h1>
+    <p class="text-center">¿Estás seguro de que deseas eliminar al usuario <strong>{{ usuario[1] }}</strong>?</p>
+    
+    <div class="d-flex justify-content-center mt-4">
+        <form action="{{ url_for('eliminar_usuario', id=usuario[0]) }}" method="post">
+            <button type="submit" class="btn btn-danger me-3">Eliminar</button>
+            <a href="{{ url_for('listar_usuarios') }}" class="btn btn-secondary">Cancelar</a>
+        </form>
+    </div>
+</div>
+{% endblock %}

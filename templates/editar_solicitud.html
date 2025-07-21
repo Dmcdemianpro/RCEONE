@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Editar Medicamentos - Solicitud {{ solicitud_id }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h2>Editar Medicamentos - Solicitud ID {{ solicitud_id }}</h2>
+  
+  <form method="POST">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Dosis</th>
+          <th>Unidad</th>
+          <th>Posología</th>
+          <th>Duración</th>
+          <th>Vía</th>
+          <th>Observaciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for p in prescripciones %}
+        <tr>
+          <!-- Hidden input con el ID de la prescripción -->
+          <input type="hidden" name="prescripcion_id[]" value="{{ p[0] }}">
+          
+          <!-- p[1] => producto, p[2] => dosis_por_toma, etc. Ajusta según tu SELECT -->
+          <td><input type="text" name="producto[]" value="{{ p[1] }}" class="form-control"></td>
+          <td><input type="text" name="dosis_por_toma[]" value="{{ p[2] or '' }}" class="form-control"></td>
+          <td><input type="text" name="unidad_entrega[]" value="{{ p[3] or '' }}" class="form-control"></td>
+          <td><input type="text" name="posologia[]" value="{{ p[4] or '' }}" class="form-control"></td>
+          <td><input type="number" name="duracion[]" value="{{ p[5] or '' }}" class="form-control"></td>
+          <td><input type="text" name="via[]" value="{{ p[6] or '' }}" class="form-control"></td>
+          <td><input type="text" name="observacion[]" value="{{ p[7] or '' }}" class="form-control"></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    
+    <div class="text-end">
+      <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+      <a href="{{ url_for('gestionar_solicitud') }}" class="btn btn-secondary">Volver</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

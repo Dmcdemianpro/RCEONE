@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Kardex Ambulatorio</h2>
+<table id="kardexTable" class="display">
+    <thead>
+        <tr>
+            <th>ID Florence</th>
+            <th>Glosa</th>
+            <th>Prescripción</th>
+            <th>Dosis Total</th>
+            <th>Dosis Parcial</th>
+            <th>Cantidad a Dispensar</th>
+            <th>Presentación</th>
+            <th>Duración (días)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Datos de la tabla aquí -->
+    </tbody>
+</table>
+{% endblock %}
+<script src="{{ url_for('static', filename='js/datatables.js') }}"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+<script>
+    $(document).ready(function() {
+        $('#kardexTable').DataTable({
+            // Configuración específica para la tabla Kardex Ambulatorio
+        });
+    });
+</script>

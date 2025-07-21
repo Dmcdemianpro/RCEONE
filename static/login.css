@@ -1,0 +1,220 @@
+/* ==========================================================================
+   HEC – Pantalla de Inicio de Sesión (v2.1)
+   Última actualización: 2025‑07‑14
+   ========================================================================== */
+
+/* 1. Reset & Base ---------------------------------------------------------- */
+:root {
+  --color-bg: #f5f8fc;          /* fondo general gris muy claro */
+  --color-card-bg: #ffffff;     /* tarjetas / paneles */
+  --color-primary: #0077cc;     /* botón primario */
+  --color-primary-hover: #005fa3;
+  --color-border: #d1d5db;
+  --radius-sm: 6px;
+  --radius-lg: 16px;
+  --shadow-card: 0 8px 20px rgba(0, 0, 0, 0.06);
+  --transition: 0.25s ease;
+  font-size: 16px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter", "Segoe UI", sans-serif;
+  background: var(--color-bg);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  color: #333;
+}
+
+/* 2. Wrapper --------------------------------------------------------------- */
+.auth-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: min(980px, 92%);
+  background: var(--color-card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+/* 3. Brand panel (ilustración) ------------------------------------------- */
+.brand-panel {
+  background: #ffffff;          /* sin degradado para parecerse al mockup */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem;
+}
+
+.brand-panel img {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+}
+
+/* 4. Login panel ----------------------------------------------------------- */
+.login-panel {
+  padding: 3rem 3rem 3.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.login-panel h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #055e75;               /* tono teal similar al ejemplo */
+}
+
+.login-panel p {
+  font-size: 0.93rem;
+  line-height: 1.45;
+  color: #555;
+  margin-bottom: 1.8rem;
+  max-width: 330px;
+}
+
+.form-group {
+  margin-bottom: 1.1rem;
+  width: 100%;
+}
+
+input.form-control {
+  width: 100%;
+  padding: 0.8rem 1rem 0.8rem 2.7rem; /* deja espacio para el ícono */
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+input.form-control:focus {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(0, 119, 204, 0.18);
+  outline: none;
+}
+
+/* Checkbox + enlaces */
+.login-extras {
+  font-size: 0.85rem;
+  color: #555;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+  width: 100%;
+}
+
+.login-extras a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.login-extras a:hover {
+  text-decoration: underline;
+}
+
+/* Botones */
+.btn-submit,
+.btn-secondary {
+  display: inline-block;
+  padding: 0.85rem 1.6rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition), transform var(--transition);
+  border: none;
+}
+
+.btn-submit {
+  background: var(--color-primary);
+  color: #fff;
+  margin-right: 0.6rem;
+}
+
+.btn-submit:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background: #fff;
+  border: 1px solid var(--color-border);
+  color: #333;
+}
+
+.btn-secondary:hover {
+  background: #f3f4f6;
+}
+
+/* Social buttons */
+.social-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-border);
+  color: #666;
+  transition: box-shadow var(--transition), transform var(--transition);
+}
+
+.social-btn:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  transform: translateY(-2px);
+}
+
+/* Flash messages ---------------------------------------------------------- */
+.flash-messages {
+  margin-top: 1.4rem;
+  width: 100%;
+}
+
+.flash-message {
+  background-color: #fef2f2;
+  color: #b91c1c;
+  border-left: 4px solid #fecaca;
+  padding: 0.75rem 1rem;
+  border-radius: var(--radius-sm);
+  font-size: 0.9rem;
+}
+
+/* 5. Responsive ----------------------------------------------------------- */
+@media (max-width: 768px) {
+  .auth-wrapper {
+    grid-template-columns: 1fr;
+  }
+
+  .brand-panel {
+    display: none; /* Ilustración se esconde en móviles */
+  }
+
+  .login-panel {
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1.5rem 2.5rem;
+  }
+
+  .login-panel p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* 6. Oculta navbar global solo en página de login ------------------------ */
+/* Si base.html tiene un <nav> antes de este contenido y no queremos mostrarlo */
+body:has(.auth-wrapper) nav {
+  display: none !important;
+}

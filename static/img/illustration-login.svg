@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" fill="none">
+  <rect width="800" height="600" fill="#f5f8fc"/>
+  <g opacity="0.08">
+    <rect x="80" y="140" width="160" height="160" rx="16" fill="#28a745"/>
+    <rect x="160" y="60" width="160" height="160" rx="16" fill="#0077cc"/>
+    <rect x="160" y="220" width="160" height="160" rx="16" fill="#ffc107"/>
+    <rect x="240" y="140" width="160" height="160" rx="16" fill="#17a2b8"/>
+  </g>
+  <rect x="460" y="120" width="240" height="320" rx="16" fill="#ffffff" stroke="#d1d5db" stroke-width="2"/>
+  <rect x="540" y="100" width="80" height="20" rx="6" fill="#0077cc"/>
+  <rect x="490" y="170" width="180" height="10" rx="5" fill="#d1d5db"/>
+  <rect x="490" y="200" width="180" height="10" rx="5" fill="#d1d5db"/>
+  <rect x="490" y="230" width="130" height="10" rx="5" fill="#d1d5db"/>
+  <rect x="490" y="270" width="180" height="10" rx="5" fill="#d1d5db"/>
+  <rect x="490" y="300" width="145" height="10" rx="5" fill="#d1d5db"/>
+  <rect x="490" y="340" width="180" height="10" rx="5" fill="#d1d5db"/>
+  <g transform="translate(490,380)">
+    <rect width="60" height="24" rx="12" fill="#0077cc"/>
+    <rect x="60" width="60" height="24" rx="12" fill="#28a745"/>
+    <rect x="55" y="7" width="10" height="10" rx="2" fill="#ffffff" opacity="0.85"/>
+  </g>
+  <text x="100" y="480" font-family="Inter,Segoe UI,sans-serif" font-size="40" fill="#0077cc" font-weight="600">Receta de Contingencia</text>
+  <text x="100" y="520" font-family="Inter,Segoe UI,sans-serif" font-size="20" fill="#555">Sistema de prescripción segura</text>
+</svg>
