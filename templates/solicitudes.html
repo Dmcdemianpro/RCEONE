@@ -140,7 +140,7 @@
                     <td><select name="unidad_dosis[]" class="form-control"><option value="">Seleccione</option><option value="mg">MG</option><option value="g">G</option><option value="ml">ML</option><option value="comprimidos">Comprimidos</option></select></td>
                     <td><select name="posologia[]" class="form-control"><option value="">Seleccione</option><option value="1 cada 8 horas">1 cada 8 horas</option><option value="1 cada 12 horas">1 cada 12 horas</option><option value="1 cada 6 horas">1 cada 6 horas</option><option value="2 veces al día">2 veces al día</option><option value="1 cada 24 horas">1 cada 24 horas</option><option value="1 cada 4 horas">1 cada 4 horas</option><option value="1 antes de cada comida">1 antes de cada comida</option><option value="1 después de cada comida">1 después de cada comida</option><option value="1 al acostarse">1 al acostarse</option><option value="Aplicar 1 vez al día">Aplicar 1 vez al día</option></select></td>
                     <td><input type="number" name="duracion[]" class="form-control"></td>
-                    <td><select name="via[]" class="form-control"><option value="">Seleccione</option><option value="ORAL">ORAL</option><option value="SUBLINGUAL">SUBLINGUAL</option><option value="TOPICA">TÓPICA</option><option value="SUBCUTANEA">SUBCUTÁNEA</option><option value="INTRAMUSCULAR">INTRAMUSCULAR</option><option value="INTRATECAL, EPIDURAL">INTRATECAL, EPIDURAL</option><option value="INTRARTICULAR">INTRARTICULAR</option><option value="INTRAVENOSA">INTRAVENOSA</option></select></td>
+                    <td><select name="via[]" class="form-control"><option value="">Seleccione</option><option value="ORAL">ORAL</option><option value="SUBLINGUAL">SUBLINGUAL</option><option value="TOPICA">TÓPICA</option><option value="SUBCUTANEA">SUBCUTÁNEA</option><option value="INTRAMUSCULAR">INTRAMUSCULAR</option><option value="INTRATECAL, EPIDURAL">INTRATECAL, EPIDURAL</option><option value="INTRAARTICULAR">INTRAARTICULAR</option><option value="INTRAVENOSA">INTRAVENOSA</option></select></td>
                     <td><input type="text" name="observacion[]" class="form-control"></td>
                 </tr>
             </tbody>
@@ -154,8 +154,15 @@
             <button type="submit" class="btn btn-primary">Enviar Solicitud</button>
         </div>
     </form>
-    <!-- Modal de la vista previa de receta -->
-<!-- Modal de la vista previa de receta -->
+
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/solicitudes_medico.js') }}"></script>
+<script src="{{ url_for('static', filename='js/parseo.js') }}"></script>
+<!-- Modal de la vista previa de receta (Mantener solo una definición) -->
 <div class="modal fade" id="recetaModal" tabindex="-1" aria-labelledby="recetaModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content p-4" id="receta-content">
@@ -186,43 +193,4 @@
     </div>
   </div>
 </div>
-
-
-</div>
-
-{% endblock %}
-
-{% block scripts %}
-<script src="{{ url_for('static', filename='js/solicitudes_medico.js') }}"></script>
-<script src="{{ url_for('static', filename='js/parseo.js') }}"></script>
-<style>
-  @media print {
-    body * {
-      visibility: hidden;
-    }
-    #receta-content, #receta-content * {
-      visibility: visible;
-    }
-    #receta-content {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-    }
-    .modal-footer {
-      display: none !important;
-    }
-  }
-
-  #receta-content {
-    font-size: 14px;
-  }
-
-  #detallesReceta table th,
-  #detallesReceta table td {
-    padding: 4px;
-    font-size: 13px;
-  }
-</style>
-
 {% endblock %}

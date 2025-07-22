@@ -1,0 +1,9 @@
+:root {
+    --primary-color: #6CB42C; /* Un verde basado en los logos */
+    --secondary-color: #0077CC; /* Un azul basado en los logos */
+    --accent-color: #FFD700; /* Un amarillo basado en los logos */
+    --background-color: #f4f6f8; /* Fondo claro */
+    --text-color: #333; /* Color de texto oscuro */
+    --border-color: #d1d5db; /* Color de borde */
+    --card-background: #ffffff; /* Fondo de tarjetas/paneles */
+}

@@ -13,6 +13,9 @@
     <!-- jQuery UI CSS -->
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     
+    <!-- CSS personalizado - Variables de color -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='colors.css') }}">
+
     <!-- CSS personalizado -->
     <link rel="stylesheet" href="{{ url_for('static', filename='formulario.css') }}">
 
@@ -21,7 +24,7 @@
 <body>
     <!-- Navbar -->
     {% if session.get('username') %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">

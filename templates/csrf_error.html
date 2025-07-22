@@ -1,13 +1,11 @@
-<!doctype html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Error de Seguridad</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
-</head>
-<body>
-    <h1>Error de Seguridad</h1>
-    <p>{{ reason }}</p>
-    <a href="{{ url_for('login') }}">Volver al inicio de sesión</a>
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}Error de Seguridad{% endblock %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+    <h1 class="text-danger mb-3">Error de Seguridad</h1>
+    <p class="alert alert-warning">{{ reason }}</p>
+    <a href="{{ url_for('login') }}" class="btn btn-primary">Volver al inicio de sesión</a>
+</div>
+{% endblock %}

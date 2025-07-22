@@ -1,19 +1,25 @@
+:root {
+    /* Importa variables de colors.css si no están ya definidas en base.html */
+    /* @import url("colors.css"); */
+}
+
 body {
     font-family: 'Segoe UI', sans-serif;
-    background-color: #f4f6f8;
+    background-color: var(--background-color);
     margin: 0;
     padding: 20px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    color: var(--text-color); /* Usar color de texto general */
 }
 
 /* Barra de navegación - Ancho completo */
 .navbar {
     width: 100%;
-    background-color: #00796b;
-    color: white;
+    background-color: var(--primary-color);
+    color: white; /* El color del texto en la barra de navegación suele ser blanco */
     padding: 15px 30px;
     display: flex;
     justify-content: space-between;
@@ -27,7 +33,7 @@ body {
 .form-container {
     width: 100%;
     max-width: 1200px;
-    background-color: #fff;
+    background-color: var(--card-background);
     padding: 20px 40px;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -52,7 +58,7 @@ body {
 
 .navbar-left a:hover,
 .navbar-right a:hover {
-    color: #f0f0f0;
+    color: #f0f0f0; /* Mantener un color claro al hacer hover */
     text-decoration: underline;
 }
 
@@ -64,7 +70,7 @@ body {
 
 /* Botón de cerrar sesión */
 .navbar-right a.logout-btn {
-    background-color: #e53935;
+    background-color: #e53935; /* Puedes considerar si este botón debería usar el color de acento o mantener un color de advertencia */
     padding: 8px 15px;
     border-radius: 20px;
     font-size: 14px;
@@ -101,7 +107,7 @@ body {
 /* Título */
 h1 {
     font-size: 1.8em;
-    color: #00796b;
+    color: var(--primary-color); /* Usar el color primario para títulos */
     text-align: center;
     margin-bottom: 20px;
     font-weight: bold;
@@ -112,34 +118,35 @@ h1 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px; /* Ajustado para un menor espaciado entre campos */
-    flex-wrap: wrap; /* Permitir que los elementos se acomoden mejor en pantallas pequeñas */
-    position: relative; /* Asegura que el autocompletado se alinee correctamente */
+    margin-bottom: 20px; 
+    flex-wrap: wrap; 
+    position: relative; 
 }
 
 .form-group label {
     flex: 1;
-    color: #333;
+    color: var(--text-color); /* Usar color de texto general */
     font-weight: bold;
     padding-right: 10px;
-    min-width: 150px; /* Asegura que los labels tengan un ancho mínimo */
+    min-width: 150px;
 }
 
 .form-group input,
 .form-group select {
-    flex: 3; /* Incrementado para que los inputs ocupen más espacio en relación al label */
+    flex: 3; 
     padding: 10px;
-    border: 1px solid #b0bec5;
+    border: 1px solid var(--border-color);
     border-radius: 5px;
-    width: 100%; /* Siempre ocupará el ancho completo disponible */
-    background-color: #f9f9f9;
+    width: 100%; 
+    background-color: #f9f9f9; /* Mantener un fondo ligeramente gris para los inputs */
+    color: var(--text-color); /* Asegurar que el texto dentro del input sea legible */
 }
 
 .form-group input:focus,
 .form-group select:focus {
-    border-color: #c3c7c6;
+    border-color: var(--primary-color); /* Resaltar con el color primario al enfocar */
     outline: none;
-    background-color: #fff;
+    background-color: var(--card-background); /* Fondo blanco al enfocar */
 }
 
 /* Tabla de Medicamentos */
@@ -150,13 +157,13 @@ table {
 }
 
 table thead {
-    background-color: #00796b;
-    color: #fff;
+    background-color: var(--primary-color);
+    color: white; /* Texto blanco en el encabezado de la tabla */
 }
 
 table th, table td {
-    padding: 12px; /* Incrementado para dar más espacio a los elementos dentro de la tabla */
-    border: 1px solid #ccc;
+    padding: 12px;
+    border: 1px solid var(--border-color);
     text-align: center;
 }
 
@@ -165,136 +172,132 @@ table select {
     width: 100%;
     padding: 8px;
     border: none;
-    background-color: #f4f4f4;
+    background-color: #f4f4f4; /* Fondo ligeramente gris para inputs en tablas */
+    color: var(--text-color); /* Color de texto en inputs de tabla */
 }
 
 table input[type="text"]:focus,
 table select:focus {
-    background-color: white;
-    border: 1px solid #5a5a5a;
+    background-color: var(--card-background); /* Fondo blanco al enfocar inputs de tabla */
+    border: 1px solid var(--primary-color); /* Resaltar con color primario al enfocar */
 }
 
 /* Botones */
 button {
     padding: 12px 20px;
-    background-color: #00796b;
+    background-color: var(--primary-color);
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1em;
+    transition: background-color 0.3s ease; /* Añadir transición al hover */
 }
 
 button:hover {
-    background-color: #757a7a;
+    background-color: #757a7a; /* Considerar usar un tono más oscuro del primario o un color de acento */
 }
 
 button.btn-primary {
-    background-color: #007bff;
+    background-color: var(--secondary-color); /* Usar color secundario para el botón primario del formulario */
     margin-left: auto;
-    margin-top: 10px; /* Añadir un margen para separar de otros elementos */
+    margin-top: 10px;
+}
+
+button.btn-primary:hover {
+     background-color: #005fa3; /* Tono más oscuro del secundario para hover */
 }
 
 /* Typeahead y menú de autocompletado */
-.typeahead {
-    width: 100%; /* Ajustar el ancho al input */
-    background-color: #ffffff;
-    border: 1px solid #00796b;
+.typeahead, .tt-menu {
+    width: 100%; 
+    background-color: var(--card-background);
+    border: 1px solid var(--primary-color);
     border-radius: 5px;
     max-height: 200px;
     overflow-y: auto;
     position: absolute;
-    z-index: 1000;
-    left: 0; /* Alinear al borde izquierdo del input */
-    top: 100%; /* Justo debajo del input */
-}
-
-.tt-menu {
-    width: 100%; /* Asegura que el menú ocupe el mismo ancho que el input */
-    background-color: white;
-    border: 1px solid #00796b;
-    border-radius: 5px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    max-height: 200px;
-    overflow-y: auto;
-    z-index: 9999;
-    position: absolute;
-    top: 100%;
-    left: 0;
+    z-index: 1000; /* Asegurar que el menú esté sobre otros elementos */
+    left: 0; 
+    top: 100%; 
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Añadir sombra al menú */
 }
 
 /* Estilos para las sugerencias */
-.typeahead .tt-suggestion {
+.tt-suggestion {
     padding: 10px;
     font-size: 16px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid var(--border-color); /* Borde sutil entre sugerencias */
     cursor: pointer;
+    color: var(--text-color); /* Color de texto para sugerencias */
 }
 
 /* Cambia el estilo al hacer hover sobre una sugerencia */
-.typeahead .tt-suggestion.tt-selectable:hover,
-.typeahead .tt-suggestion.tt-cursor {
-    background-color: #00796b;
-    color: #ffffff;
+.tt-suggestion.tt-selectable:hover,
+.tt-suggestion.tt-cursor {
+    background-color: var(--primary-color);
+    color: white; /* Texto blanco al hacer hover en sugerencia */
 }
 
 /* Ajustes para los inputs */
 .form-label {
     margin-bottom: 5px;
+    color: var(--text-color); /* Color de texto para labels */
 }
 
 .form-control {
-    width: 100% !important; /* Asegura que los campos de entrada ocupen todo el ancho */
+    width: 100% !important;
 }
+
 input[type="hidden"] {
     display: none;
 }
+
 /* Estilos generales del modal para imitar el aspecto de un documento */
 #recetaModal .modal-content {
-    font-family: 'Times New Roman', Times, serif; /* Típica fuente de documentos */
-    font-size: 1rem; /* Tamaño de fuente base */
-    color: #333; /* Color de texto oscuro pero no puro negro */
-    border: 1px solid #ddd; /* Borde sutil */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra suave para darle profundidad */
-    padding: 20px; /* Espaciado interno */
-    background-color: #fcfcfc; /* Fondo ligeramente fuera del blanco puro */
+    font-family: 'Times New Roman', Times, serif; 
+    font-size: 1rem; 
+    color: var(--text-color); 
+    border: 1px solid var(--border-color); 
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); 
+    padding: 20px; 
+    background-color: #fcfcfc; /* Mantener un fondo ligeramente fuera del blanco puro */
 }
 
 /* Encabezado del modal: Información del centro médico/doctor */
 #recetaModal .modal-header {
-    border-bottom: 2px solid #eee; /* Línea separadora */
+    border-bottom: 2px solid var(--border-color); 
     padding-bottom: 15px;
     margin-bottom: 20px;
-    text-align: center; /* Centrar el título */
-    position: relative; /* Para posicionar elementos absolutamente si es necesario */
+    text-align: center; 
+    position: relative; 
 }
 
 #recetaModal .modal-title {
-    font-size: 1.5rem; /* Tamaño de título más grande */
+    font-size: 1.5rem; 
     font-weight: bold;
-    color: #212529; /* Un color más oscuro para el título */
-    text-transform: uppercase; /* Opcional: para un aspecto más formal */
+    color: var(--text-color); /* Usar color de texto general para el título del modal */
+    text-transform: uppercase; 
     margin-bottom: 5px;
 }
 
 /* Puedes añadir un pseudo-elemento o un span aquí para el "membrete" */
 #recetaModal .modal-header::before {
-    content: "Clínica Salud Total - Dr. Juan Pérez"; /* Ejemplo de información del médico/clínica */
+    content: "Clínica Salud Total - Dr. Juan Pérez"; 
     display: block;
     font-size: 0.9rem;
-    color: #666;
+    color: #666; /* Considerar usar un tono de gris de las variables */
     margin-bottom: 10px;
 }
 
 /* Cuerpo del modal: Detalles de la receta */
 #recetaModal .modal-body {
     padding-top: 0;
-    line-height: 1.6; /* Espaciado entre líneas para mejor legibilidad */
+    line-height: 1.6; 
 }
 
 #recetaModal #detallesReceta {
-    /* Estilos para el contenido que se insertará dinámicamente */
-    min-height: 150px; /* Asegura un mínimo de altura */
+    min-height: 150px; 
     padding: 10px 0;
 }
 
@@ -304,15 +307,15 @@ input[type="hidden"] {
 }
 
 #recetaModal #detallesReceta strong {
-    color: #000; /* Resaltar etiquetas */
+    color: #000; /* Considerar usar un tono de gris oscuro o el color de texto principal */
 }
 
 /* Estilos para el pie de página del modal */
 #recetaModal .modal-footer {
-    border-top: 2px solid #eee; /* Línea separadora */
+    border-top: 2px solid var(--border-color); 
     padding-top: 15px;
     margin-top: 20px;
-    justify-content: flex-end; /* Alinear botones a la derecha */
+    justify-content: flex-end; 
 }
 
 /* Estilos para los botones, si quieres personalizarlos */
@@ -323,29 +326,25 @@ input[type="hidden"] {
 }
 
 #imprimirReceta {
-    background-color: #6c757d; /* Color para el botón Imprimir */
+    background-color: #6c757d; /* Considerar usar un tono de gris o color secundario */
     border-color: #6c757d;
     color: white;
 }
 
 #confirmarEnvio {
-    background-color: #007bff; /* Color para el botón Confirmar Envío */
-    border-color: #007bff;
+    background-color: var(--primary-color); /* Usar color primario para el botón de confirmar envío */
+    border-color: var(--primary-color);
     color: white;
 }
 
 /* Estilos para simular un "membrete" en la parte superior del modal */
-/* Esto es solo una idea, puedes ajustarlo o incluso omitirlo */
 #recetaModal .modal-header::after {
-    content: "Fecha: " attr(data-date) " - Nº Receta: " attr(data-receta-num); /* Ejemplo de datos dinámicos */
+    content: "Fecha: " attr(data-date) " - Nº Receta: " attr(data-receta-num); 
     display: block;
     font-size: 0.85rem;
-    color: #777;
+    color: #777; /* Considerar usar un tono de gris */
     text-align: right;
     position: absolute;
     top: 15px;
     right: 20px;
 }
-
-/* Puedes agregar atributos data-date y data-receta-num a tu div.modal para que esto funcione */
-/* Ejemplo: <div class="modal fade" id="recetaModal" data-date="15/07/2025" data-receta-num="R-12345"> */

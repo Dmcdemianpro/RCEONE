@@ -4,7 +4,7 @@
 
 {% block content %}
 <div class="container mt-5">
-    <h1 class="mb-4">Crear Nuevo Usuario</h1>
+    <h1 class="mb-4 text-center">Crear Nuevo Usuario</h1>
     
     <!-- Mensajes flash (si los usas) -->
     {% with messages = get_flashed_messages() %}
@@ -39,56 +39,42 @@
         </div>
       </div>
       
-      <div>
-        <label for="role">Rol</label>
-        <select name="role" id="role">
-            <option value="usuario">Usuario</option>
-            <!-- IMPORTANT: Sin espacios ni tildes, tal cual 'medico' -->
-            <option value="medico">Médico</option> 
-            <option value="admin">Administrador</option>
-        </select>
-    </div>
-
-    <div>
-        <label for="username">Nombre de Usuario</label>
-        <input type="text" name="username" id="username" required>
-    </div>
-
-    <div>
-        <label for="password">Contraseña</label>
-        <input type="password" name="password" id="password" required>
-    </div>
+      <div class="row mb-3">
+        <div class="col-md-6">
+          <label for="role" class="form-label">Rol</label>
+          <select class="form-select" id="role" name="role" required>
+              <option value="usuario">Usuario</option>
+              <option value="medico">Médico</option> 
+              <option value="admin">Administrador</option>
+          </select>
+        </div>
+      </div>
 
     <!-- Campos de Profesional (solo se usarán si role=medico) -->
-    <div id="datosMedico" style="margin-top: 1rem;">
-        <label>RUN Profesional</label>
-        <input type="text" name="run_profesional" id="run_profesional">
+    <div id="datosMedico" class="row mb-3" style="display: none;"> {# Mantenemos display: none; por defecto, lo manejaremos con JS #}
+        <div class="col-md-4">
+          <label for="run_profesional" class="form-label">RUN Profesional</label>
+          <input type="text" class="form-control" name="run_profesional" id="run_profesional">
+        </div>
 
-        <label>Nombre Profesional</label>
-        <input type="text" name="nombre_profesional" id="nombre_profesional">
+        <div class="col-md-4">
+          <label for="nombre_profesional" class="form-label">Nombre Profesional</label>
+          <input type="text" class="form-control" name="nombre_profesional" id="nombre_profesional">
+        </div>
 
-        <!-- Campo único para ambos apellidos -->
-        <label>Apellidos Profesional (ej. "García Pérez")</label>
-        <input type="text" name="apellido_profesional" id="apellido_profesional">
+        <div class="col-md-4">
+          <label for="apellido_profesional" class="form-label">Apellidos Profesional (ej. "García Pérez")</label>
+          <input type="text" class="form-control" name="apellido_profesional" id="apellido_profesional">
+        </div>
 
-        <label>Tipo Profesional</label>
-        <input type="text" name="tipo_profesional" id="tipo_profesional">
-    </div>
+        </div>
+        <div class="row mb-3" id="datosMedico2" style="display: none;"> {# Mantenemos display: none; por defecto, lo manejaremos con JS #}
+          <div class="col-md-4">
+            <label for="tipo_profesional" class="form-label">Tipo Profesional</label>
+            <input type="text" class="form-control" name="tipo_profesional" id="tipo_profesional">
+          </div>
+        </div>
 
-    <button type="submit">Crear Usuario</button>
-</form>
-
-<script>
-// Opcional: mostrar/ocultar los campos de médico si role=medico
-document.getElementById('role').addEventListener('change', function() {
-    const datosMedico = document.getElementById('datosMedico');
-    if (this.value === 'medico') {
-        datosMedico.style.display = 'block';
-    } else {
-        datosMedico.style.display = 'none';
-    }
-});
-</script>
       
       <div class="mt-4">
         <button type="submit" class="btn btn-primary">Crear Usuario</button>
@@ -99,16 +85,28 @@ document.getElementById('role').addEventListener('change', function() {
     </form>
 </div>
 
-<!-- Script para mostrar/ocultar los campos de datos profesionales -->
+{% endblock %}
+
+{% block scripts %}
 <script>
-    function toggleProfessionalFields() {
-        var role = document.getElementById('role').value;
-        var professionalFields = document.getElementById('professionalFields');
-        if (role === 'medico') {
-            professionalFields.style.display = 'block';
-        } else {
-            professionalFields.style.display = 'none';
+    document.addEventListener('DOMContentLoaded', function() {
+        const roleSelect = document.getElementById('role');
+        const datosMedico = document.getElementById('datosMedico');
+        const datosMedico2 = document.getElementById('datosMedico2');
+
+        function toggleProfessionalFields() {
+            if (roleSelect.value === 'medico') {
+                datosMedico.style.display = 'flex'; // Usar flex para las columnas de Bootstrap
+                datosMedico2.style.display = 'flex';
+            } else {
+                datosMedico.style.display = 'none';
+                datosMedico2.style.display = 'none';
+            }
         }
-    }
+
+        // Ejecutar al cargar la página y al cambiar la selección
+        toggleProfessionalFields(); 
+        roleSelect.addEventListener('change', toggleProfessionalFields);
+    });
 </script>
 {% endblock %}

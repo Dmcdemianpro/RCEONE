@@ -1,15 +1,6 @@
-/* ==========================================================================
-   HEC – Pantalla de Inicio de Sesión (v2.1)
-   Última actualización: 2025‑07‑14
-   ========================================================================== */
-
-/* 1. Reset & Base ---------------------------------------------------------- */
 :root {
-  --color-bg: #f5f8fc;          /* fondo general gris muy claro */
-  --color-card-bg: #ffffff;     /* tarjetas / paneles */
-  --color-primary: #0077cc;     /* botón primario */
-  --color-primary-hover: #005fa3;
-  --color-border: #d1d5db;
+  /* Importa variables de colors.css si no están ya definidas en base.html */
+  /* @import url("colors.css"); */
   --radius-sm: 6px;
   --radius-lg: 16px;
   --shadow-card: 0 8px 20px rgba(0, 0, 0, 0.06);
@@ -25,12 +16,12 @@
 
 body {
   font-family: "Inter", "Segoe UI", sans-serif;
-  background: var(--color-bg);
+  background: var(--background-color);
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  color: #333;
+  color: var(--text-color);
 }
 
 /* 2. Wrapper --------------------------------------------------------------- */
@@ -38,7 +29,7 @@ body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   width: min(980px, 92%);
-  background: var(--color-card-bg);
+  background: var(--card-background);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
   overflow: hidden;
@@ -46,7 +37,7 @@ body {
 
 /* 3. Brand panel (ilustración) ------------------------------------------- */
 .brand-panel {
-  background: #ffffff;          /* sin degradado para parecerse al mockup */
+  background: var(--card-background); /* Usar el color de fondo de tarjeta */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -72,13 +63,13 @@ body {
   font-size: 2rem;
   font-weight: 600;
   margin-bottom: 1rem;
-  color: #055e75;               /* tono teal similar al ejemplo */
+  color: var(--primary-color); /* Usar el color primario para el título */
 }
 
 .login-panel p {
   font-size: 0.93rem;
   line-height: 1.45;
-  color: #555;
+  color: var(--text-color); /* Usar color de texto general */
   margin-bottom: 1.8rem;
   max-width: 330px;
 }
@@ -90,23 +81,25 @@ body {
 
 input.form-control {
   width: 100%;
-  padding: 0.8rem 1rem 0.8rem 2.7rem; /* deja espacio para el ícono */
-  border: 1px solid var(--color-border);
+  padding: 0.8rem 1rem 0.8rem 2.7rem; 
+  border: 1px solid var(--border-color);
   border-radius: var(--radius-sm);
   font-size: 0.95rem;
   transition: border-color var(--transition), box-shadow var(--transition);
+  color: var(--text-color); /* Asegurar color de texto en input */
+  background-color: var(--card-background); /* Fondo blanco para inputs */
 }
 
 input.form-control:focus {
-  border-color: var(--color-primary);
-  box-shadow: 0 0 0 3px rgba(0, 119, 204, 0.18);
+  border-color: var(--primary-color); /* Resaltar con color primario al enfocar */
+  box-shadow: 0 0 0 3px rgba(0, 119, 204, 0.18); /* Considerar usar un color de acento o primario para la sombra */
   outline: none;
 }
 
 /* Checkbox + enlaces */
 .login-extras {
   font-size: 0.85rem;
-  color: #555;
+  color: var(--text-color); /* Usar color de texto general */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -115,7 +108,7 @@ input.form-control:focus {
 }
 
 .login-extras a {
-  color: var(--color-primary);
+  color: var(--secondary-color); /* Usar color secundario para enlaces */
   text-decoration: none;
 }
 
@@ -137,24 +130,23 @@ input.form-control:focus {
 }
 
 .btn-submit {
-  background: var(--color-primary);
+  background: var(--primary-color); /* Usar color primario para el botón de submit */
   color: #fff;
   margin-right: 0.6rem;
 }
 
 .btn-submit:hover {
-  background: var(--color-primary-hover);
-  transform: translateY(-2px);
+  background: #005fa3; /* Considerar un tono más oscuro del primario para hover */
 }
 
 .btn-secondary {
-  background: #fff;
-  border: 1px solid var(--color-border);
-  color: #333;
+  background: var(--card-background); /* Fondo blanco */
+  border: 1px solid var(--border-color);
+  color: var(--text-color); /* Color de texto general */
 }
 
 .btn-secondary:hover {
-  background: #f3f4f6;
+  background: var(--background-color); /* Fondo ligeramente gris para hover */
 }
 
 /* Social buttons */
@@ -162,12 +154,12 @@ input.form-control:focus {
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  background: #fff;
+  background: var(--card-background); /* Fondo blanco */
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--color-border);
-  color: #666;
+  border: 1px solid var(--border-color);
+  color: #666; /* Considerar usar un tono de gris de las variables */
   transition: box-shadow var(--transition), transform var(--transition);
 }
 
@@ -183,9 +175,9 @@ input.form-control:focus {
 }
 
 .flash-message {
-  background-color: #fef2f2;
-  color: #b91c1c;
-  border-left: 4px solid #fecaca;
+  background-color: #fef2f2; /* Considerar usar un color de fondo de advertencia basado en la paleta */
+  color: #b91c1c; /* Considerar usar un color de texto de advertencia basado en la paleta */
+  border-left: 4px solid #fecaca; /* Considerar usar un color de borde de advertencia basado en la paleta */
   padding: 0.75rem 1rem;
   border-radius: var(--radius-sm);
   font-size: 0.9rem;
@@ -198,7 +190,7 @@ input.form-control:focus {
   }
 
   .brand-panel {
-    display: none; /* Ilustración se esconde en móviles */
+    display: none; 
   }
 
   .login-panel {
@@ -214,7 +206,6 @@ input.form-control:focus {
 }
 
 /* 6. Oculta navbar global solo en página de login ------------------------ */
-/* Si base.html tiene un <nav> antes de este contenido y no queremos mostrarlo */
 body:has(.auth-wrapper) nav {
   display: none !important;
 }

@@ -20,6 +20,8 @@
     </tbody>
 </table>
 {% endblock %}
+
+{% block scripts %}
 <script src="{{ url_for('static', filename='js/datatables.js') }}"></script>
 <script src="{{ url_for('static', filename='js/app.js') }}"></script>
 <script>
@@ -29,3 +31,4 @@
         });
     });
 </script>
+{% endblock %}

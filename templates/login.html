@@ -4,71 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Iniciar Sesión</title>
-  <!-- Font Awesome para los iconos -->
-  <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-oBWk7LHdLg4llcuhYob7bL5J0iFBiV5vNiNI0/Fn0UKZjmpVN+/uHoZ59owmDZT0hW70MrfoV7X16BNn27raIw==" crossorigin="anonymous" referrerpolicy="no-referrer" />-->
-  <style>
-    /* =========================================================
-       HEC – Login v2.2  (ajuste para mock‑up)
-       ========================================================= */
-    :root {
-      --color-bg: #f5f8fc;
-      --color-card-bg: #ffffff;
-      --color-primary: #0067d9;
-      --color-primary-hover: #0054b3;
-      --color-border: #cfd6e0;
-      --radius-sm: 6px;
-      --radius-lg: 18px;
-      --shadow-card: 0 10px 24px rgba(0, 0, 0, 0.05);
-      --transition: 0.25s ease;
-      font-size: 16px;
-    }
-    *{box-sizing:border-box;margin:0;padding:0;}
-    body{
-      font-family:"Inter","Segoe UI",sans-serif;
-      background:var(--color-bg);
-      min-height:100vh;display:flex;align-items:center;justify-content:center;color:#333;
-    }
-    .auth-wrapper{
-      display:grid;grid-template-columns:440px 1fr;gap:3rem;
-      padding:3rem 4rem;background:var(--color-card-bg);
-      border-radius:var(--radius-lg);box-shadow:var(--shadow-card);
-      max-width:1100px;width:100%;
-    }
-    .brand-panel{display:flex;align-items:center;justify-content:center;}
-    .brand-panel img{width:100%;max-width:360px;height:auto;border-radius:8px;}
-    .login-panel{display:flex;flex-direction:column;justify-content:center;max-width:420px;}
-    .login-panel h1{font-size:1.9rem;font-weight:600;color:#005079;margin-bottom:1rem;}
-    .login-panel p{font-size:.94rem;color:#5a6168;line-height:1.5;margin-bottom:2rem;}
-    .form-group{position:relative;margin-bottom:1.2rem;}
-    .form-group i{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:#7a7d82;font-size:.9rem;}
-    input.form-control{
-      width:100%;padding:.85rem 1rem .85rem 2.9rem;border:1px solid var(--color-border);
-      border-radius:var(--radius-sm);font-size:.96rem;
-      transition:border-color var(--transition),box-shadow var(--transition);
-    }
-    input.form-control:focus{border-color:var(--color-primary);box-shadow:0 0 0 3px rgba(0,103,217,.18);outline:none;}
-    .login-extras{display:flex;justify-content:space-between;align-items:center;font-size:.82rem;color:#5a6168;margin-bottom:1.4rem;}
-    .login-extras a{color:var(--color-primary);text-decoration:none;}
-    .btn-submit,.btn-secondary{
-      border:none;border-radius:var(--radius-sm);padding:.8rem 1.6rem;font-size:.95rem;font-weight:600;cursor:pointer;transition:background var(--transition),transform var(--transition);
-    }
-    .btn-submit{background:var(--color-primary);color:#fff;margin-right:.6rem;}
-    .btn-submit:hover{background:var(--color-primary-hover);transform:translateY(-1px);}
-    .btn-secondary{background:#fff;color:#333;border:1px solid var(--color-border);}
-    .btn-secondary:hover{background:#f3f4f6;}
-    .social-group{display:flex;gap:1rem;margin-top:1.5rem;}
-    .social-btn{width:40px;height:40px;border-radius:50%;background:#fff;border:1px solid var(--color-border);display:flex;align-items:center;justify-content:center;color:#666;transition:box-shadow var(--transition),transform var(--transition);}
-    .social-btn:hover{box-shadow:0 4px 10px rgba(0,0,0,.06);transform:translateY(-2px);}
-    .flash-messages{margin-top:1.6rem;}
-    .flash-message{background:#fef2f2;color:#b91c1c;border-left:4px solid #fecaca;padding:.8rem 1rem;border-radius:var(--radius-sm);font-size:.9rem;}
-    @media(max-width:900px){
-      .auth-wrapper{grid-template-columns:1fr;padding:2.5rem 2rem;gap:2rem;}
-      .brand-panel{order:-1;}
-      .brand-panel img{max-width:280px;}
-      .login-panel{align-items:center;text-align:center;max-width:100%;}
-      .login-panel h1{font-size:1.8rem;}
-    }
-  </style>
+  <!-- Font Awesome para los iconos (si se usa) -->
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-oBWk7LHdLg4llcuhYob7bL5J0iFBiV5vNiNI0/Fn0UKZjmpVN+/uHoZ59owmDZT0hW70MrfoV7X16BNn27raIw==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+
+  <!-- CSS personalizado - Variables de color -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='colors.css') }}">
+
+  <!-- CSS personalizado del login -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+
 </head>
 <body>
   <div class="auth-wrapper">
@@ -94,7 +38,7 @@
         </div>
         <div class="login-extras">
           <label style="display:flex;align-items:center;gap:6px;cursor:pointer;">
-            <input type="checkbox" name="remember" style="accent-color: var(--color-primary);"> Remember Me
+            <input type="checkbox" name="remember" style="accent-color: var(--primary-color);"> Remember Me
           </label>
 
         </div>
@@ -102,7 +46,7 @@
           <button type="submit" class="btn-submit">Login in</button>
 
         </div>
-      </form>
+        </form>
 
 
 
