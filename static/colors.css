@@ -1,9 +1,13 @@
 :root {
-    --primary-color: #6CB42C; /* Un verde basado en los logos */
-    --secondary-color: #0077CC; /* Un azul basado en los logos */
-    --accent-color: #FFD700; /* Un amarillo basado en los logos */
-    --background-color: #f4f6f8; /* Fondo claro */
-    --text-color: #333; /* Color de texto oscuro */
-    --border-color: #d1d5db; /* Color de borde */
-    --card-background: #ffffff; /* Fondo de tarjetas/paneles */
+    --primary-color: #3498db; /* Un azul, cámbialo por tu color primario */
+    --secondary-color: #2ecc71; /* Un verde, cámbialo por tu color secundario */
+    --background-color: #f4f4f4; /* Un gris claro para el fondo */
+    --text-color: #333; /* Un gris oscuro para el texto general */
+    --card-background: #ffffff; /* Blanco para el fondo de tarjetas o contenedores */
+    --border-color: #ddd; /* Un gris para los bordes */
+    --hover-color: #2980b9; /* Un tono más oscuro para efectos hover */
+    --success-color: #28a745; /* Verde para mensajes de éxito */
+    --error-color: #dc3545; /* Rojo para mensajes de error */
+    --warning-color: #ffc107; /* Amarillo para advertencias */
+    --info-color: #17a2b8; /* Cian para información */
 }
